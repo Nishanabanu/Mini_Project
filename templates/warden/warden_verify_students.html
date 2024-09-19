@@ -1,0 +1,71 @@
+{% extends "warden/base.html" %}
+{% block title %}
+Warden | Verify Students
+{% endblock title %}
+{% block body %}
+
+<h2 style="text-align: center; margin-bottom: 20px;">Verify Students</h2>
+
+<div style="width: fit-content;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Si. No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Image</th>
+                <th scope="col">Admission Number</th>
+                <th scope="col">Course</th>
+                <th scope="col">Status</th>
+                <th scope="col">Accept / Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in students %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ i.name|capfirst }}</td>
+                <td>{{ i.number}}</td>
+                <td>{{ i.address}}</td>
+                <td><a href="{{ i.image.url }}">view</a></td>
+                <td>{{ i.admission_number}}</td>
+                <td>{{ i.COURSE.course_name }}</td>
+                <td>{{ i.LOGIN.role}}</td>
+                <td>{% if i.LOGIN.role == "pending" %}
+                    <form method="POST" action='warden_accept_reject_student' style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN.id }}">
+                        <input type="hidden" name="action" value="accept">
+                        <button type="submit" class="btn btn-success">Accept</button>
+                    </form>
+                    <form method="POST" action='warden_accept_reject_student' style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN.id }}">
+                        <input type="hidden" name="action" value="reject">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+
+                    {% elif i.LOGIN.role == "student" or i.LOGIN.role == "blocked" %}
+                    <form method="POST" action='warden_block_unblock_student' style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN.id }}">
+                        <input type="hidden" name="action" value="block">
+                        <button type="submit" class="btn btn-success">Block</button>
+                    </form>
+                    &nbsp;
+                    <form method="POST" action='warden_block_unblock_student' style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN.id }}">
+                        <input type="hidden" name="action" value="unblock">
+                        <button type="submit" class="btn btn-danger">Unblock</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

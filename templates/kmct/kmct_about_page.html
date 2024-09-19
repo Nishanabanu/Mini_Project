@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - KMCT College of Engineering Women's Hostel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .navbar {
+            background-color: #d5e8d4; /* Set the background color of the navbar to orange */
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: #c4e3ed;
+            border-radius: 5px;
+        }
+
+        .btn-login {
+            background-color: #28a745; /* Initial color */
+            color: #fff;
+        }
+        .btn-login:hover {
+            background-color: #218838; /* Hover color */
+            color: #fff;
+        }
+        footer {
+            background-color: #0a011b;
+            color: #fff;
+            padding: 20px 0;
+        }
+        footer a {
+            color: rgb(160, 160, 178);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: none;
+            color: rgb(108, 108, 111);
+        }
+        footer h3 {
+            font-size: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .about-section {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        .about-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .about-section h3 {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .about-section p, .about-section li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .about-section ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/kmct/logo black new.png" alt="Logo" width="25" height="25" class="d-inline-block align-text-top">
+                HostelEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="margin-left: 800px;" class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'kmct_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'kmct_about_page' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'kmct_gallery_page' %}">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-login" href="{% url 'kmct_login_page' %}" style="padding: 5px 15px;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container about-section">
+        <h1 class="text-center">About Us</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead">
+                    <strong>KMCT College of Engineering Women's Hostel</strong> is dedicated to providing a safe, comfortable, and supportive living environment for our female students. Located within the serene campus of KMCT College of Engineering, our hostel serves as a home away from home, fostering both personal growth and academic success.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Our Vision</h3>
+                <p>
+                    Our vision is to create a nurturing and empowering environment that promotes academic excellence, personal development, and well-being for every resident. We strive to cultivate a community where students feel valued, supported, and inspired to achieve their full potential.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Facilities and Amenities</h3>
+                <ul>
+                    <li><strong>Safe and Secure Environment:</strong> The hostel is equipped with round-the-clock security, CCTV surveillance, and access control systems to ensure the safety of all residents.</li>
+                    <li><strong>Comfortable Accommodation:</strong> Our hostel offers well-furnished rooms with essential amenities, including study tables, wardrobes, and comfortable beds, designed to meet the needs of students.</li>
+                    <li><strong>Nutritious Meals:</strong> A clean and hygienic mess provides nutritious meals, catering to a variety of dietary preferences.</li>
+                    <li><strong>Wi-Fi and Study Spaces:</strong> High-speed internet and dedicated study areas are available to support the academic needs of our students.</li>
+                    <li><strong>Health and Wellness:</strong> On-campus medical facilities and regular health check-ups ensure the well-being of our residents.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Community and Support</h3>
+                <p>
+                    The KMCT Women's Hostel is more than just a place to stay; it's a community. We encourage students to engage in various activities, from cultural events to sports, fostering a sense of camaraderie and belonging. Our dedicated staff, including wardens and counselors, are always available to provide guidance and support, helping students navigate the challenges of college life.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-4 mb-5">
+            <div class="col-md-12">
+                <h3>Location</h3>
+                <p>
+                    Nestled within the KMCT College of Engineering campus, the women's hostel offers convenient access to academic buildings, libraries, and recreational facilities, allowing students to fully immerse themselves in campus life.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid" style="margin-top: 20px;">
+        <div class="row text-center text-md-left">
+            <div class="col-md-2 col-sm-2 lg-2">
+                <img src="https://kmctcoe.ac.in/img/logo/footer_logo.svg" alt="kmct logo" class="img-fluid">
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT College Of Engineering</strong><br>
+                    Kallanthode<br>
+                    NITC-P.O<br>
+                    Kozhikode-673601
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:coe@kmct.edu.in">coe@kmct.edu.in</a><br>
+                <a href="https://kmct.edu.in">kmct.edu.in</a>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT Corporate Office</strong><br>
+                    Door No. 7/530B, Carino Inc.<br>
+                    Pooladikunnu, Eranhikkal P.O.<br>
+                    Elathur, Kozhikode - 673 303, Kerala
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:mail@kmct.edu.in">mail@kmct.edu.in</a><br>
+                <a href="https://carinoinc.co.in">carinoinc.co.in</a>
+            </div>
+            <div class="col-md-2">
+                <h3>Quick Links</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/admissions">Admissions</a></li>
+                    <li><a href="https://kmctcoe.ac.in/facility">Infrastructure Facilities</a></li>
+                    <li><a href="https://kmctcoe.ac.in/placement">Training & Placement</a></li>
+                    <li><a href="https://kmctcoe.ac.in/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>Downloads</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/regulations">KTU Regulations</a></li>
+                    <li><a target="_blank" href="https://kmctcoe.ac.in/imgserver/uploads/attachments/kmct_1717997265220_69_0.pdf">AICTE Approval</a></li>
+                    <li><a href="https://kmctcoe.ac.in/curriculum">Curriculum</a></li>
+                    <li><a href="https://kmctcoe.ac.in/downloads">Downloads</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>News & Events</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/latest-news">Latest News</a></li>
+                    <li><a href="https://kmctcoe.ac.in/upcoming-events">Upcoming Events</a></li>
+                    <li><a href="https://kmctcoe.ac.in/news-archives">News Archives</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row text-center mt-4">
+            <div class="col-md-12">
+                <p>&copy; <a href="https://kmctcoe.ac.in" target="_blank" style="color:#c4e3ed;">kmct.edu.in</a></p>
+            </div>
+        </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostelease - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #d5e8d4;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #c4e3ed;
+            border-radius: 5px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 30px;
+            background-color: #e6f3e6;
+        }
+
+        .btn-submit {
+            background-color: #9ecaa1;
+            color: #fff;
+            width: 100%;
+            border-radius: 30px;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #7eb58a;
+        }
+
+        .forgot-password,
+        .signup {
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+        }
+
+        .forgot-password:hover,
+        .signup:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #0a011b;
+            color: #fff;
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: rgb(160, 160, 178);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: rgb(108, 108, 111);
+        }
+
+        footer h3 {
+            font-size: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 10px;
+                margin-top: 120px;
+            }
+
+            .navbar-toggler {
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/kmct/logo black new.png" alt="Logo" width="25" height="25" class="d-inline-block align-text-top">
+                HostelEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url "kmct_home" %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "kmct_about_page" %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "kmct_gallery_page" %}">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="login-container" style="margin-top: 30%;">
+        <h2>LOGIN</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" name="username" placeholder="username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="password" required>
+            </div>
+            <button type="submit" class="btn btn-submit">Login</button><br><br>
+            <!-- <a href="#" class="forgot-password">Forgot password?</a> -->
+            <p>Don't have an account? <a href="{% url 'student_registration' %}" class="signup">Sign Up</a></p>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="container-fluid" style="margin-top: 30px;">
+        <div class="row text-center text-md-left">
+            <div class="col-md-2 col-sm-2">
+                <img src="https://kmctcoe.ac.in/img/logo/footer_logo.svg" alt="kmct logo" class="img-fluid">
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT College Of Engineering</strong><br>
+                    Kallanthode<br>
+                    NITC-P.O<br>
+                    Kozhikode-673601
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:coe@kmct.edu.in">coe@kmct.edu.in</a><br>
+                <a href="https://kmct.edu.in">kmct.edu.in</a>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT Corporate Office</strong><br>
+                    Door No. 7/530B, Carino Inc.<br>
+                    Pooladikunnu, Eranhikkal P.O.<br>
+                    Elathur, Kozhikode - 673 303, Kerala
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:mail@kmct.edu.in">mail@kmct.edu.in</a><br>
+                <a href="https://carinoinc.co.in">carinoinc.co.in</a>
+            </div>
+            <div class="col-md-2">
+                <h3>Quick Links</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/admissions">Admissions</a></li>
+                    <li><a href="https://kmctcoe.ac.in/facility">Infrastructure Facilities</a></li>
+                    <li><a href="https://kmctcoe.ac.in/placement">Training & Placement</a></li>
+                    <li><a href="https://kmctcoe.ac.in/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>Downloads</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/regulations">KTU Regulations</a></li>
+                    <li><a target="_blank" href="https://kmctcoe.ac.in/imgserver/uploads/attachments/kmct_1717997265220_69_0.pdf">AICTE Approval</a></li>
+                    <li><a href="https://kmctcoe.ac.in/curriculum">Curriculum</a></li>
+                    <li><a href="https://kmctcoe.ac.in/downloads">Downloads</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>News & Events</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/latest-news">Latest News</a></li>
+                    <li><a href="https://kmctcoe.ac.in/upcoming-events">Upcoming Events</a></li>
+                    <li><a href="https://kmctcoe.ac.in/news-archives">News Archives</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row text-center mt-4">
+            <div class="col-md-12">
+                <p>&copy; <a href="https://kmctcoe.ac.in" target="_blank" style="color:#c4e3ed;">kmct.edu.in</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

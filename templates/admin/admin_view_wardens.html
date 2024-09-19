@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | View Wardens
+{% endblock title %}
+{% block body %}
+
+<h1 style="text-align: center;">LIST OF WARDENS</h1>
+<a href="{% url 'admin_add_warden' %}" class="btn btn-success" style="margin-left: 10px;">Add new warden</a>
+
+<div class="container" style="margin-top: 10px;">
+    <div class="row">
+        {% for i in warden_details %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+                <div class="card" style="width: 100%;">
+                    {% if i.image %}
+                        <img class="card-img-top" src="{{ i.image.url }}" style="height: 200px; width: 100%; object-fit: cover;">
+                    {% else %}
+                        <img class="card-img-top" src="{% static 'image.png' %}" style="height: 200px; width: 100%; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">NAME: {{ i.name }}</h5>
+                        <p class="card-text">PHONE: {{ i.phone }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ADDRESS: {{ i.address }}</li>
+                            <li class="list-group-item">HOSTEL: <b>{{ i.HOSTEL.name }}</b></li>
+                            <li class="list-group-item">HOSTEL NUMBER: <b>{{ i.HOSTEL.number }}</b></li>
+                        </ul>
+                        <div class="mt-auto text-center">
+                            <a href="{% url 'admin_edit_warden' i.id %}" class="btn btn-primary">Edit</a>
+                            {% comment %} <a href="{% url 'admin_delete_warden' i.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

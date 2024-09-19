@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | Reply Complaint
+{% endblock title %}
+{% block body %}
+
+<form method="POST" action="{% url 'reply_complaint' complaint_object.id %}" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    <h2 style="text-align: center; margin-bottom: 20px;">Reply to Complaint</h2>
+    
+    <div class="form-group">
+        <label for="user_complaint" style="font-weight: bold;">Complaint:</label>
+        <input type="text" name="user_complaint" readonly value="{{ complaint_object.complaint }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+    <div class="form-group">
+        <label for="complaint_reply" style="font-weight: bold;">Reply:</label>
+        <textarea name="complaint_reply" rows="5" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Reply</button>
+    </div>
+</form>
+
+{% endblock body %}

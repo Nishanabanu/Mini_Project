@@ -1,0 +1,35 @@
+{% extends "warden/base.html" %}
+{% load static %}
+{% block title %}
+Warden | View Rooms
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-5 mb-5 pb-5">
+    <div class="row">
+        <a href="{% url 'warden_add_new_room' %}" class="btn btn-success" style="margin-left: 10px;">Add New Room</a>
+
+        <div class="col-md-4">
+            {% for i in room_list %}
+            <div class="room-card text-center">
+                <!-- Room Image -->
+                <div class="room-image">
+                    <img src="{{i.image.url}}" alt="Room Image">
+                </div>
+                <p class="capacity">Capacity: {{i.capacity}}</p>
+                <ul class="student-list">
+                    <li>{{i.STUDENT.name}}</li>
+                    <li>{{i.STUDENT.name}}</li>
+                    <li>{{i.STUDENT.name}}</li>
+                    <li>{{i.STUDENT.name}}</li>
+                </ul>
+                <div class="card-footer">
+                    <button class="btn btn-custom-edit">Edit</button>
+                    <button class="btn btn-custom-assign">Assign Student</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

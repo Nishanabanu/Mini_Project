@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | Send Notification
+{% endblock title %}
+{% block body %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Send Notification</h2>
+    <form method="POST" action="{% url 'admin_send_notification' %}" style="max-width: 600px; margin: auto;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="user_type" class="font-weight-bold">User Type:</label>
+            <select name="user_type" id="user_type" class="form-control" required>
+                <option value="">-- Select User Type --</option>
+                <option value="student">Student</option>
+                <option value="warden">Warden</option>
+                <option value="tutor">Tutor</option>
+                <option value="parent">Parent</option>
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <label for="notification" class="font-weight-bold">Notification:</label>
+            <textarea name="notification" id="notification" rows="5" class="form-control" placeholder="Enter notification details here..." required></textarea>
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Send Notification</button>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}

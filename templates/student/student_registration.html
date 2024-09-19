@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+            footer {
+                background-color: #0a011b;
+                color: #fff;
+                padding: 20px 0;
+            }
+            footer a {
+                color: rgb(160, 160, 178);
+                text-decoration: none;
+            }
+            footer a:hover {
+                text-decoration: none;
+                color: rgb(108, 108, 111);
+            }
+            footer h3 {
+                font-size: 1.2em;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+    
+    
+            #main {
+                transition: margin-left .5s;
+                padding: 16px;
+            }
+    
+            .openbtn {
+                font-size: 20px;
+                cursor: pointer;
+                background-color: #4f7591;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+            }
+    
+            .openbtn:hover {
+                background-color: #444;
+            }
+    
+            /* Responsive adjustments */
+            @media screen and (max-width: 768px) {
+                #sidebar {
+                    width: 250px;
+                }
+                #main {
+                    margin-left: 0;
+                }
+            }
+    
+            @media screen and (max-width: 768px) {
+                .openbtn {
+                    font-size: 16px;
+                    padding: 8px 10px;
+                }
+                #sidebar a {
+                    font-size: 16px;
+                    padding: 8px;
+                }
+            }
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .registration-form {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .registration-form h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="number"], .form-group input[type="date"] {
+            border-radius: 4px;
+        }
+        .form-group img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .password-container {
+            position: relative;
+        }
+        .password-container input {
+            padding-right: 40px;
+        }
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/kmct/logo black new.png" alt="Logo" width="25" height="25" class="d-inline-block align-text-top">
+                HostelEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="margin-left: 800px;" class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'kmct_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "kmct_about_page" %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "kmct_gallery_page" %}">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+            {% comment %} <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-login" href="{% url 'kmct_login_page' %}" style="padding: 5px 15px;">Login</a>
+                </li>
+            </ul> {% endcomment %}
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 10px;">
+        <div class="registration-form">
+            <h2 style="text-align: center; font-family: 'Times New Roman', Times, serif; color: #007bff"><i>Student Registration</i></h2><br>
+            <form id="registration-form" method="post" enctype="multipart/form-data" action="{% url "student_registration" %}">
+                {% csrf_token %}
+                <!-- Student Information -->
+                <h4 style="text-align: center;">Student's Personal Information</h4>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Number:</label>
+                    <input type="number" pattern="[0-9]{10}" class="form-control" id="number" name="number" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                    <small id="age-warning" class="text-danger" style="display: none;">You must be at least 18 years old.</small>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="image">Upload Image:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" required>
+                </div>
+                <div class="form-group">
+                    <label for="parent_phone_number">Parent Phone Number:</label>
+                    <input type="number" pattern="[0-9]{10}" class="form-control" id="parent_phone_number" name="parent_phone_number" required>
+                </div>
+                <h4 style="text-align: center;">Course Information</h4>
+                <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select class="form-control" id="course" name="course" required>
+                        {% for course in courses %}
+                            <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="admission_number">Admission Number:</label>
+                    <input type="text" class="form-control" id="admission_number" name="admission_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Year:</label>
+                    <input type="number" class="form-control" id="academic_year" name="academic_year" required>
+                </div>
+                <!-- Login Information -->
+                <h4 style="text-align: center;">Login Information</h4>
+                <div class="form-group password-container">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group password-container">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <span style="margin-top: 15px;" class="toggle-password" onclick="togglePasswordVisibility()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                
+
+                <button type="submit" class="btn btn-submit" id="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid" style="margin-top: 30px;">
+        <div class="row text-center text-md-left">
+            <div class="col-md-2 col-sm-2 lg-2">
+                <img src="https://kmctcoe.ac.in/img/logo/footer_logo.svg" alt="kmct logo" class="img-fluid">
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT College Of Engineering</strong><br>
+                    Kallanthode<br>
+                    NITC-P.O<br>
+                    Kozhikode-673601
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:coe@kmct.edu.in">coe@kmct.edu.in</a><br>
+                <a href="https://kmct.edu.in">kmct.edu.in</a>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    <strong>KMCT Corporate Office</strong><br>
+                    Door No. 7/530B, Carino Inc.<br>
+                    Pooladikunnu, Eranhikkal P.O.<br>
+                    Elathur, Kozhikode - 673 303, Kerala
+                </p>
+                <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                <a href="mailto:mail@kmct.edu.in">mail@kmct.edu.in</a><br>
+                <a href="https://carinoinc.co.in">carinoinc.co.in</a>
+            </div>
+            <div class="col-md-2">
+                <h3>Quick Links</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/admissions">Admissions</a></li>
+                    <li><a href="https://kmctcoe.ac.in/facility">Infrastructure Facilities</a></li>
+                    <li><a href="https://kmctcoe.ac.in/placement">Training & Placement</a></li>
+                    <li><a href="https://kmctcoe.ac.in/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>Downloads</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/regulations">KTU Regulations</a></li>
+                    <li><a target="_blank" href="https://kmctcoe.ac.in/imgserver/uploads/attachments/kmct_1717997265220_69_0.pdf">AICTE Approval</a></li>
+                    <li><a href="https://kmctcoe.ac.in/curriculum">Curriculum</a></li>
+                    <li><a href="https://kmctcoe.ac.in/downloads">Downloads</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>News & Events</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://kmctcoe.ac.in/latest-news">Latest News</a></li>
+                    <li><a href="https://kmctcoe.ac.in/upcoming-events">Upcoming Events</a></li>
+                    <li><a href="https://kmctcoe.ac.in/news-archives">News Archives</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row text-center mt-4">
+            <div class="col-md-12">
+                <p>&copy; <a href="https://kmctcoe.ac.in" target="_blank" style="color:#c4e3ed;">kmct.edu.in</a></p>
+            </div>
+        </div>
+      </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+
+   <script>
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("password");
+        var toggleIcon = document.querySelector(".toggle-password i");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        }
+    }
+    
+ 
+    function calculateAge(dob) {
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', function(event) {
+        const dob = document.getElementById('dob').value;
+        const age = calculateAge(dob);
+
+        if (age < 18) {
+            event.preventDefault();  // Prevent form submission
+            alert("You must be at least 18 years old to register.");
+            document.getElementById('age-warning').style.display = 'block';
+        } else {
+            document.getElementById('age-warning').style.display = 'none';
+        }
+    });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | View Complaints
+{% endblock title %}
+{% block body %}
+
+<h1 style="text-align: center;">LIST OF COMPLAINTS</h1>
+
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Complaint</th>
+        <th scope="col">Image</th>
+        <th scope="col">Reply</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for complaint in complaints %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ complaint.STUDENT.name }}</td>
+            <td>{{ complaint.date }}</td>
+            <td>{{ complaint.complaint }}</td>
+            <td>
+                {% if complaint.image %}
+                <img src="{{ complaint.image.url }}" alt="Complaint Image" style="max-width: 100px;">
+                {% else %}
+                No Image
+                {% endif %}
+            </td>
+            <td>
+                {% if complaint.replied_status %}
+                {{ complaint.reply }}
+                {% else %}
+                <a href="{% url 'reply_complaint' complaint.id %}" class="btn btn-primary">Reply</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock body %}

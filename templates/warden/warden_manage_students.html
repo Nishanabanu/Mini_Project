@@ -1,0 +1,45 @@
+{% extends "warden/base.html" %}
+{% load static %}
+{% block title %}
+Warden | Verify Students
+{% endblock title %}
+{% block body %}
+<div style="width: fit-content;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Si. No</th>
+                <th scope="col">Name</th>
+                <th scope="col">ID Proof</th>
+                <th scope="col">Image</th>
+                <th scope="col">Accept / Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in farmer_details %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ i.name }}</td>
+                <td><a href="{{ i.id_proof }}">view</a></td>
+                <td><a href="{{ i.farmer_image }}">view</a></td>
+                <td>
+                    <form method="POST" action='warden_verify_student' style="display: inline;">
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN_ID.id }}">
+                        <input type="hidden" name="action" value="accept">
+                        <button type="submit" class="btn btn-success">Accept</button>
+                    </form>
+                    &nbsp;
+                    <form method="POST" action='warden_verify_student' style="display: inline;">
+                        <input type="hidden" name="login_id" value="{{ i.LOGIN_ID.id }}">
+                        <input type="hidden" name="action" value="reject">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock body %}

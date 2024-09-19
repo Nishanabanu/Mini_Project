@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | View Tutors
+{% endblock title %}
+{% block body %}
+
+<h1 style="text-align: center;">LIST OF TUTORS</h1>
+<a href="{% url 'admin_add_tutor' %}" class="btn btn-success" style="margin-left: 10px;">Add New Tutor</a>
+
+<div class="container" style="margin-top: 10px;">
+    <div class="row">
+        {% for tutor in tutors %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex align-items-stretch">
+                <div class="card" style="width: 100%;">
+                    {% if tutor.image %}
+                        <img class="card-img-top" src="{{ tutor.image.url }}" style="height: 200px; width: 100%; object-fit: cover;">
+                    {% else %}
+                        <img class="card-img-top" src="{% static 'image.png' %}" style="height: 200px; width: 100%; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">NAME: {{ tutor.name }}</h5>
+                        <p class="card-text">PHONE: {{ tutor.phone_number }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">DEPARTMENT: {{ tutor.COURSE.DEPARTMENT.name }}</li>
+                            <li class="list-group-item">COURSE: {{ tutor.COURSE.course_name }}</li>
+                            <li class="list-group-item">YEAR: {{ tutor.year }}</li>
+                        </ul>
+                        <div class="mt-auto text-center">
+                            <a href="{% url 'admin_edit_tutor' tutor.id %}" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No Tutors found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

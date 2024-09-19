@@ -1,0 +1,108 @@
+{% extends "warden/base.html" %}
+{% load static %}
+
+{% block title %}
+Warden | Edit Profile
+{% endblock title %}
+
+{% block body %}
+<style>
+    body {
+        background: linear-gradient(135deg, #e0f7fa, #80deea);
+        font-family: Arial, sans-serif;
+    }
+
+    .edit-profile-card {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-profile-card h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .edit-profile-card label {
+        display: block;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .edit-profile-card input[type="text"],
+    .edit-profile-card input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .edit-profile-card input[type="submit"] {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+    }
+
+    .edit-profile-card input[type="submit"]:hover {
+        background-color: #45a049; /* Darker green */
+    }
+
+    .edit-profile-card .btn-back {
+        background-color: #f30909; /* Red */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .edit-profile-card .btn-back:hover {
+        background-color: #d30808; /* Darker red */
+    }
+
+</style>
+
+<div class="container">
+    <div class="edit-profile-card">
+        <h2>Edit Warden Profile</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ warden.name }}" required>
+
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="{{ warden.phone }}" required>
+
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" value="{{ warden.address }}" required>
+
+            <label for="old">Old Image</label>
+            <img src="{{ warden.image.url }}" height="200" width="250">
+
+            <label for="image">Profile Image</label>
+            <input type="file" id="image" name="image">
+
+            <input type="submit" value="Save Changes">
+        </form>
+        <a href="javascript:history.back()" class="btn-back">Cancel</a>
+    </div>
+</div>
+{% endblock body %}

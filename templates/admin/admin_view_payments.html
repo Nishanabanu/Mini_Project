@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Admin | View Payments
+{% endblock title %}
+
+{% block body %}
+<h1>View Payments</h1>
+
+<form method="POST" action="{% url 'admin_send_payment_request' %}">
+    {% csrf_token %}
+    <input type="number" name="amount" placeholder="Enter amount" required>
+    <button type="submit" class="btn btn-primary">Send Payment Request to All</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Requested</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payment in payments %}
+            <tr>
+                <td>{{ payment.STUDENT.name }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.date }}</td>
+                <td>{{ payment.status }}</td>
+                <td>
+                    {% if payment.is_requested %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}

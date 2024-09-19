@@ -1,0 +1,376 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Warden | {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Navbar Customization */
+        .navbar {
+            background-color: #193447; /* Background color */
+        }
+        
+        .navbar .navbar-brand {
+            color: white; /* Brand text color */
+            font-weight: bold;
+        }
+        
+        .navbar .navbar-nav .nav-link {
+            color: white; /* Link text color */
+            margin-right: 20px; /* Spacing between links */
+        }
+        
+        .navbar .navbar-nav .nav-link:hover {
+            color: #f1f1f1; /* Hover effect */
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #00080e;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        #sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #4f7591;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #de0000;
+        }
+
+        .closebtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #f30909;
+            color: rgb(224, 126, 126);
+            padding: 10px 15px;
+            border: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #0a011b;
+            color: #fff;
+            padding: 20px 0;
+        }
+        footer a {
+            color: rgb(160, 160, 178);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: none;
+            color: rgb(108, 108, 111);
+        }
+        footer h3 {
+            font-size: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .card {
+            border-radius: 10px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 20px;
+            }
+        }        .room-card {
+            border: 3px solid green;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .room-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .room-image img {
+            border: 2px solid green;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .capacity {
+            color: #00bfff;
+            font-weight: bold;
+        }
+        .student-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .student-list li {
+            color: #00bfff;
+            margin: 5px 0;
+        }
+        .btn-custom-edit {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-custom-assign {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-custom-edit:hover {
+            background-color: #218838;
+        }
+        .btn-custom-assign:hover {
+            background-color: #0056b3;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Card Section */
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body h5 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-body p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #193447;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #f1f1f1;
+            margin: 0 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Button Animations */
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="sidebar"><br><h2 style="font-family: cursive;margin-left:30px; color:white; font-size:medium;"><u>Hello, {{ request.session.warden_name }}</h2><hr></u>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close the sidebar</a>
+        <a href="{% url 'warden_view_profile' %}">View Profile</a>
+        <a href="#">View Leave</a>
+        <a href="#">View Local Movement</a>
+        <a href="{% url 'warden_change_password' %}">Change Password</a>
+
+    </div>
+
+    <div id="main">
+        <div class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="openbtn" onclick="openNav()">&#9776;</button>
+                <a class="navbar-brand">
+                    <img style="background-color: white; margin-left:10px;" src="../static/kmct/logo black new.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+                Hostel Ease </a> 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-item nav-link" href="{% url 'warden_home' %}">Home</a>
+                        <a class="nav-item nav-link" href="{% url 'warden_verify_student' %}">Verify Students</a>
+                        <a class="nav-item nav-link" href="{% url 'warden_view_rooms' %}">Manage Rooms</a>
+                        <a class="nav-item nav-link" href="#">Manage Notifications</a>
+                        <a class="nav-item nav-link" href="#">Manage Complaints</a>
+                        <a href="{% url 'logout' %}" class="ml-auto">
+                            <i class="fas fa-sign-out-alt" style="font-size:30px;color:red; margin-top:6px;"></i>
+                        </a> 
+                    </div>
+                </div>
+            </nav>
+        </div><br>
+
+        {% block body %}
+        <!-- Content goes here -->
+        {% endblock %}
+
+        <footer class="container-fluid" style="margin-top: 20px;">
+            <div class="row text-center text-md-left">
+                <div class="col-md-2 col-sm-2 lg-2">
+                    <img src="https://kmctcoe.ac.in/img/logo/footer_logo.svg" alt="kmct logo" class="img-fluid">
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        <strong>KMCT College Of Engineering</strong><br>
+                        Kallanthode<br>
+                        NITC-P.O<br>
+                        Kozhikode-673601
+                    </p>
+                    <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                    <a href="mailto:coe@kmct.edu.in">coe@kmct.edu.in</a><br>
+                    <a href="https://kmct.edu.in">kmct.edu.in</a>
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        <strong>KMCT Corporate Office</strong><br>
+                        Door No. 7/530B, Carino Inc.<br>
+                        Pooladikunnu, Eranhikkal P.O.<br>
+                        Elathur, Kozhikode - 673 303, Kerala
+                    </p>
+                    <a href="tel:+919048566888">+91 90485 66888<br>+91 97457 26888</a><br>
+                    <a href="mailto:mail@kmct.edu.in">mail@kmct.edu.in</a><br>
+                    <a href="https://carinoinc.co.in">carinoinc.co.in</a>
+                </div>
+                <div class="col-md-2">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="https://kmctcoe.ac.in/admissions">Admissions</a></li>
+                        <li><a href="https://kmctcoe.ac.in/facility">Infrastructure Facilities</a></li>
+                        <li><a href="https://kmctcoe.ac.in/placement">Training & Placement</a></li>
+                        <li><a href="https://kmctcoe.ac.in/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Downloads</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="https://kmctcoe.ac.in/regulations">KTU Regulations</a></li>
+                        <li><a target="_blank" href="https://kmctcoe.ac.in/imgserver/uploads/attachments/kmct_1717997265220_69_0.pdf">AICTE Approval</a></li>
+                        <li><a href="https://kmctcoe.ac.in/curriculum">Curriculum</a></li>
+                        <li><a href="https://kmctcoe.ac.in/mandatory-disclosure">Mandatory Disclosure</a></li>
+                        <li><a href="https://kmctcoe.ac.in/downloads">Downloads</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>External Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a target="_blank" href="https://ktu.edu.in/home.htm">Login to KTU</a></li>
+                        <li><a target="_blank" href="https://kmct.edu.in/">KMCT Group</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>    
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

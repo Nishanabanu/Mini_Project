@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | Add Department
+{% endblock title %}
+{% block body %}
+
+<form method="POST" action="{% url 'admin_add_departments' %}" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    <h2 style="text-align: center; margin-bottom: 20px;">Add Department</h2>
+    <div class="form-group" style="display: flex; flex-direction: column; gap: 15px;">
+        <label for="name" style="font-weight: bold;">Department Name:</label>
+        <input type="text" name="name" placeholder="Department Name" autocomplete="off" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        
+        <label for="image" style="font-weight: bold;">Image:</label>
+        <input type="file" name="image" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+
+        <input type="submit" value="Add Department" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background-color: #007bff; color: white; font-size: 16px; cursor: pointer;">
+    </div>
+</form>
+
+{% if success %}
+<script>
+    alert("Department added successfully");
+    window.location.href = "{% url 'admin_view_departments' %}";
+</script>
+{% endif %}
+{% endblock body %}

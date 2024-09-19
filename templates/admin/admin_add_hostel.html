@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | Add New Hostel
+{% endblock title %}
+{% block body %}
+
+<form method="POST" action="{% url 'admin_add_hostel' %}" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    <h2 style="text-align: center; margin-bottom: 20px;">Add New Hostel</h2>
+    <div class="Hostel" style="display: flex; flex-direction: column; gap: 15px;">
+
+        {% if error %}
+        <div style="color: red; text-align: center; margin-bottom: 20px;">{{ error }}</div>
+        {% endif %}
+        
+        {% if success %}
+        <div style="color: green; text-align: center; margin-bottom: 20px;">Hostel added successfully</div>
+        {% endif %}
+
+        <label for="Hostel" style="font-weight: bold;">Name:
+            <input type="text" name="name" placeholder="Name" autocomplete="off" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label for="number" style="font-weight: bold;">Number:
+            <input type="number" required name="number" placeholder="Number" autocomplete="off" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label style="display: block; font-weight: bold;">Details:
+            <textarea required rows="4" name="address" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);"></textarea>
+        </label>
+        <label for="Image" style="font-weight: bold;">Image:
+            <input type="file" name="image" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label style="display: block; font-weight: bold;">Status:
+            <select name="status" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </label>
+        
+        <label for="courses" style="font-weight: bold;">Courses Accepted:</label>
+        <div id="courses">
+            {% for course in courses %}
+            <label>
+                <input type="checkbox" name="courses" value="{{ course.id }}"> {{ course.course_name }}
+            </label><br>
+            {% endfor %}
+        </div>
+        
+        <input type="submit" value="Add Hostel" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background-color: #007bff; color: white; font-size: 16px; cursor: pointer;">
+    </div>
+</form>
+
+{% if success %}
+<script>
+    alert("Hostel added successfully");
+    window.location.href = "{% url 'admin_view_hostel' %}";
+</script>
+{% endif %}
+{% endblock body %}

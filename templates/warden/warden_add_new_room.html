@@ -1,0 +1,34 @@
+{% extends "warden/base.html" %}
+{% load static %}
+{% block title %}
+Warden | Add Room
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add New Room</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="warden_add_new_room" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="room_number">Room Number</label>
+                    <input type="text" class="form-control" id="room_number" name="room_number" placeholder="Enter room number" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="capacity">Capacity</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Enter room capacity" required>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="image">Room Image</label>
+                    <input type="file" class="form-control" id="image" name="image" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Add Room</button>
+                    <a href="{% url 'warden_view_rooms' %}" class="btn btn-secondary ml-3">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

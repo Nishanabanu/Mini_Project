@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}
+Admin | Edit Warden
+{% endblock title %}
+{% block body %}
+
+<form method="POST" action="{% url 'admin_edit_warden' warden.id %}" enctype="multipart/form-data" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    <h2 style="text-align: center; margin-bottom: 20px;">Edit Warden</h2>
+    <div class="warden" style="display: flex; flex-direction: column; gap: 15px;">
+        <label for="Hostel" style="font-weight: bold;">Name:
+            <input type="text" name="name" placeholder="name" autocomplete="off" value="{{ warden.name }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label for="Phone" style="font-weight: bold;">Phone:
+            <input type="number" required name="phone" placeholder="phone" autocomplete="off" value="{{ warden.phone }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label style="display: block; font-weight: bold;">Address:
+            <textarea required rows="4" name="address" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">{{ warden.address }}</textarea>
+        </label>
+        
+        <label for="current_image" style="font-weight: bold;">Current Image:</label>
+        <img src="{{ warden.image.url }}" alt="Current Image" style="max-width: 200px; margin-bottom: 15px;">
+        
+        <label for="Image" style="font-weight: bold;">Change Image:
+            <input type="file" name="image" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label for="UserName" style="font-weight: bold;">UserName:
+            <input type="text" required name="user_name" placeholder="username" autocomplete="off" value="{{ warden.LOGIN.user_name }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <label for="Password" style="font-weight: bold;">Password:
+            <input type="password" required name="password" placeholder="password" autocomplete="off" value="{{ warden.LOGIN.password }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </label>
+        <!-- <label for="hostel" style="font-weight: bold;">Select Hostel:<br>
+        <select name="hostel_id" id="hostel_name" required>
+            <option value="">--SELECT HOSTEL--</option>
+        </select>
+        </label> -->
+
+        <input type="submit" value="Save Changes" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background-color: #007bff; color: white; font-size: 16px; cursor: pointer;">
+    </div>
+</form>
+
+{% if success %}
+<script>
+    alert("Warden edited successfully");
+    window.location.href = "{% url 'admin_view_wardens' %}";
+</script>
+{% endif %}
+{% endblock body %}

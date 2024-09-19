@@ -1,0 +1,121 @@
+{% extends "warden/base.html" %}
+{% load static %}
+{% block title %}
+Warden | View Profile
+{% endblock title %}
+{% block name %}{% endblock name %}
+{% block body %}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #e0f7fa, #80deea);
+        font-family: Arial, sans-serif;
+    }
+    
+    .profile-card {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-card img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    
+    .profile-card h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #333;
+    }
+    
+    .profile-card p {
+        margin: 5px 0;
+        font-size: 18px;
+        color: #666;
+        text-align: left;
+    }
+    
+    .info h4 {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .info p {
+        font-size: 16px;
+        color: #666;
+        text-align: left;
+    }
+    
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    
+    .btn-edit {
+        background-color: #4CAF50; /* Green color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .btn-back {
+        background-color: #f30909; /* Red color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .btn-edit:hover {
+        background-color: #45a049; /* Darker green */
+    }
+    
+    .btn-back:hover {
+        background-color: #d30808; /* Darker red */
+    }
+    
+</style>
+
+<div class="container">
+    <div class="profile-card">
+        <img src="{{ warden_profile.image.url }}" alt="Warden Image">
+        <h2>{{ warden_profile.name }}</h2>
+        <p><strong>Phone:</strong> {{ warden_profile.phone }}</p>
+        <p><strong>Address:</strong> {{ warden_profile.address }}</p>
+    
+        <div class="info"><br>
+            <h4 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Hostel Information</h4><br>
+            {% if warden_profile.HOSTEL %}
+                <p><strong>Hostel Name:</strong> {{ warden_profile.HOSTEL.name }}</p>
+                <p><strong>Hostel Number:</strong> {{ warden_profile.HOSTEL.number }}</p>
+                <p><strong>Location:</strong> {{ warden_profile.HOSTEL.address }}</p>
+            {% else %}
+                <p>No hostel assigned.</p>
+            {% endif %}
+        </div>
+        <div class="button-container">
+            <a href="{% url 'warden_edit_profile' %}">
+                <button class="btn-edit">Edit Profile</button>
+            </a>
+            <a href="warden_home"><button class="btn-back">Back</button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
